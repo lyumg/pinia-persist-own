@@ -15,18 +15,19 @@ interface StorageProps {
 }
 type CryptProps =
   | {
-      useCrypt?: false;
-      encrypt?: never;
-      decrypt?: never;
-    }
+    useCrypt?: false;
+    encrypt?: never;
+    decrypt?: never;
+  }
   | {
-      useCrypt: true;
-      encrypt: (data: string) => string;
-      decrypt: (secretData: string) => string;
-    };
+    useCrypt: true;
+    encrypt: (data: string) => string;
+    decrypt: (secretData: string) => string;
+  };
 export type PersistProps = {
   name?: string;
   keys?: string[];
+  onAfterRestore?: (state: StateTree) => void;
 } & StorageProps & CryptProps;
 
 const STORAGE = window.sessionStorage;
@@ -106,6 +107,7 @@ export const createPersist = ({ options, store }: PiniaPluginContext): void => {
 
     if (data) {
       store.$state = Object.assign(store.$state, data);
+      strategy.onAfterRestore?.(store.$state)
     }
   });
   store.$subscribe((_: any, states: StateTree) => {

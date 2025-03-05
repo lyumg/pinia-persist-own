@@ -1,6 +1,6 @@
 {
 	"name": "pinia-persist-own",
-	"version": "0.0.9",
+	"version": "0.2.0",
 	"description": "pinia 持久化插件, 可加密",
 	"author": "lyu",
 	"type": "module",
@@ -8,15 +8,21 @@
 		"dist",
 		"README"
 	],
-	"main": "dist/main.umd.js",
-	"module": "dist/main.es.js",
 	"exports": {
 		".": {
-			"import": "./dist/main.es.js",
-			"require": "./dist/main.umd.js"
+			"import": {
+				"default": "./dist/main.es.js",
+				"types": "./dist/main.d.ts"
+			},
+			"require": {
+				"default": "./dist/main.umd.js",
+				"types": "./dist/main.d.ts"
+			}
 		}
 	},
-	"typings": "dist/main.d.ts",
+	"main": "dist/main.umd.js",
+	"module": "dist/main.es.js",
+	"types": "dist/main.d.ts",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/lx11573/pinia-persist-own.git"
